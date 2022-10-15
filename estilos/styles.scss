@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor-app {
+    .tablero {
+        display: grid;
+        grid-template-columns: repeat(30, 20px);
+        grid-template-rows: repeat(30, 20px);
+        .cuadrado {
+            background: #222;
+        }
+
+        .serpiente {
+            background: #2df829;
+        }
+
+        .manzana {
+            background: #f82929;
+        }
+    }
+}

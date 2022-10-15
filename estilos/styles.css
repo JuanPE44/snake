@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contenedor-app .tablero {
+  display: grid;
+  grid-template-columns: repeat(30, 20px);
+  grid-template-rows: repeat(30, 20px);
+}
+.contenedor-app .tablero .cuadrado {
+  background: #222;
+}
+.contenedor-app .tablero .serpiente {
+  background: #2df829;
+}
+.contenedor-app .tablero .manzana {
+  background: #f82929;
+}
+
+/*# sourceMappingURL=styles.css.map */
