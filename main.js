@@ -168,13 +168,14 @@ class Cuadrado {
     }
 }
 
-var fotogramasPorSegundo = 10;
+var fotogramasPorSegundo = 5;
 const btnIniciar = document.querySelector('.btn-iniciar');
 let requestID;
 const G = new Game();
 
 btnIniciar.addEventListener('click', ()=> {
     loop()
+    btnIniciar.style.display = 'none';
 });
 
 G.iniciar()

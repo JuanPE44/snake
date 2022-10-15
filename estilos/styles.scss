@@ -1,7 +1,11 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Silkscreen', cursive;
 }
 
 body {
@@ -9,15 +13,40 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background: #222;
 }
 
 .contenedor-app {
     .tablero {
+        position: relative;
         display: grid;
         grid-template-columns: repeat(30, 20px);
         grid-template-rows: repeat(30, 20px);
+        border: 2px solid #2df829;
+
+        .botones {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .btn-iniciar {
+                color: #2df829;
+                font-size: 3rem;                
+                padding: 1.5rem;
+                border: 2px dashed #2df829;
+                cursor: pointer;
+            }
+
+            .btn-reiniciar {
+                display: none;
+            }
+        }
+
         .cuadrado {
-            background: #222;
+            
         }
 
         .serpiente {
