@@ -60,15 +60,20 @@ class Game {
         let cola = this.serpienteActual.pop()  
         let idCabeza = this.obtenerIds(this.serpienteActual[0]);
         let idManzana = this.obtenerIds(this.manzana);        
-
-        if(this.direccion === 1) {
-            direccion = idCabeza[0]+'-'+(parseInt(idCabeza[1])+1);
-        } else if(this.direccion === 2) {
-            direccion = (parseInt(idCabeza[0])-1)+'-'+idCabeza[1];
-        } else if(this.direccion === 3) {
-            direccion = idCabeza[0]+'-'+(parseInt(idCabeza[1])-1);
-        } else if(this.direccion === 4) {
-            direccion = (parseInt(idCabeza[0])+1)+'-'+idCabeza[1];
+        
+        switch(this.direccion) {
+            case 
+                1: direccion = idCabeza[0]+'-'+(parseInt(idCabeza[1])+1);
+            break;
+            case 
+                2: direccion = (parseInt(idCabeza[0])-1)+'-'+idCabeza[1];
+            break;
+            case 
+                3: direccion = idCabeza[0]+'-'+(parseInt(idCabeza[1])-1);
+            break;
+            case 
+                4: direccion = (parseInt(idCabeza[0])+1)+'-'+idCabeza[1];
+            break;
         }
 
         this.serpienteActual.unshift(direccion); 
