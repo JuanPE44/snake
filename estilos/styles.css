@@ -40,7 +40,11 @@ body {
   display: none;
 }
 .contenedor-app .tablero .serpiente {
+  border: 1px solid #222;
   background: #2df829;
+}
+.contenedor-app .tablero .cabeza {
+  background: #21d121;
 }
 .contenedor-app .tablero .manzana {
   background: #f82929;

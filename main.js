@@ -9,6 +9,12 @@ class Game {
     }
 
     iniciar() {
+        document.addEventListener('keydown',(e)=> this.control(e));
+        this.rellenarTablero();
+        this.manzanaAzar();
+    }
+
+    rellenarTablero() {
         let tablero = [];
         const divTablero = document.querySelector('.tablero');
 
@@ -24,26 +30,28 @@ class Game {
                 divTablero.appendChild(cuadrado);
             }
         }
-        this.tablero = tablero;
-        
-        document.addEventListener('keydown',(e)=> this.control(e));
-
-        this.manzanaAzar();
-        
+        this.tablero = tablero;                
     }
 
     despintarSerpiente() {
         this.serpienteActual.forEach(id => {
             let ids = this.obtenerIds(id);
             this.tablero[ids[0]][ids[1]].classList.remove('serpiente');
+            this.tablero[ids[0]][ids[1]].classList.remove('cabeza');
         }); 
     }
 
 
-    pintarSerpiente() {        
+    pintarSerpiente() {  
+        let primero = true;      
         this.serpienteActual.forEach(id => {
             let ids = this.obtenerIds(id);
-            this.tablero[ids[0]][ids[1]].classList.add('serpiente');
+            if(primero) {
+                this.tablero[ids[0]][ids[1]].classList.add('cabeza');
+                primero = false;
+            } else {
+                this.tablero[ids[0]][ids[1]].classList.add('serpiente');
+            }             
         }); 
     }
 
@@ -74,11 +82,11 @@ class Game {
         if(this.comprobarGolpe()) {
             if(requestID) {
                 window.cancelAnimationFrame(requestID);
-                console.log(this.serpienteActual);
-
             }
         } else { 
+            this.despintarSerpiente();
             this.moverSerpiente();
+            this.pintarSerpiente();
         }
     }
 
@@ -112,7 +120,7 @@ class Game {
     chocarPared(idCabeza) {
         let id0 = parseInt(idCabeza[0]);
         let id1 = parseInt(idCabeza[1]);
-        if(id1 > 0 && id1 < 29 && id0 > 0 && id0 < 29) {            
+        if(id1 >= 0 && id1 <= 29 && id0 >= 0 && id0 <= 29) {            
             return false;
         } else {
             return true;
@@ -174,17 +182,17 @@ let requestID;
 const G = new Game();
 
 btnIniciar.addEventListener('click', ()=> {
+    G.iniciar()
     loop()
     btnIniciar.style.display = 'none';
+    
 });
 
-G.iniciar()
+
 
 function loop() {
     setTimeout(function() {
         requestID = window.requestAnimationFrame(loop);
-        G.despintarSerpiente();
         G.moverResultado();
-        G.pintarSerpiente();
     }, 1000 / fotogramasPorSegundo);
 }

@@ -37,6 +37,7 @@ body {
                 font-size: 3rem;                
                 padding: 1.5rem;
                 border: 2px dashed #2df829;
+                
                 cursor: pointer;
             }
 
@@ -50,7 +51,12 @@ body {
         }
 
         .serpiente {
+            border: 1px solid #222;
             background: #2df829;
+        }
+
+        .cabeza {
+            background: #21d121;
         }
 
         .manzana {
