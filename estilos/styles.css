@@ -14,12 +14,59 @@ body {
   background: #222;
 }
 
+.contenedor-app .puntaje {
+  display: flex;
+  margin-left: 20px;
+}
+.contenedor-app .puntaje h3 {
+  color: #2df829;
+  font-size: 1.2rem;
+}
 .contenedor-app .tablero {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(30, 20px);
-  grid-template-rows: repeat(30, 20px);
-  border: 2px solid #2df829;
+  grid-template-columns: repeat(25, 20px);
+  grid-template-rows: repeat(25, 20px);
+}
+.contenedor-app .tablero .arriba {
+  position: absolute;
+  width: calc(100% - 36px);
+  height: 20px;
+  top: 0;
+  left: 18px;
+  background: #222;
+  border-bottom: 2px solid #2df829;
+  z-index: 50;
+}
+.contenedor-app .tablero .derecha {
+  position: absolute;
+  height: calc(100% - 40px);
+  width: 20px;
+  right: 0;
+  top: 20px;
+  background: #222;
+  border-left: 2px solid #2df829;
+  z-index: 50;
+}
+.contenedor-app .tablero .abajo {
+  position: absolute;
+  width: calc(100% - 36px);
+  height: 20px;
+  bottom: 0;
+  left: 18px;
+  background: #222;
+  border-top: 2px solid #2df829;
+  z-index: 50;
+}
+.contenedor-app .tablero .izquierda {
+  position: absolute;
+  height: calc(100% - 40px);
+  width: 20px;
+  left: 0;
+  top: 20px;
+  background: #222;
+  border-right: 2px solid #2df829;
+  z-index: 50;
 }
 .contenedor-app .tablero .botones {
   position: absolute;
@@ -31,20 +78,25 @@ body {
 }
 .contenedor-app .tablero .botones .btn-iniciar {
   color: #2df829;
-  font-size: 3rem;
-  padding: 1.5rem;
-  border: 2px dashed #2df829;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  border: 2px solid #2df829;
   cursor: pointer;
 }
 .contenedor-app .tablero .botones .btn-reiniciar {
   display: none;
+  color: #2df829;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  border: 2px solid #2df829;
+  cursor: pointer;
 }
 .contenedor-app .tablero .serpiente {
-  border: 1px solid #222;
   background: #2df829;
 }
 .contenedor-app .tablero .cabeza {
   background: #21d121;
+  border-radius: 2px;
 }
 .contenedor-app .tablero .manzana {
   background: #f82929;

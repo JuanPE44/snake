@@ -1,36 +1,48 @@
-
 class Game {
 
     constructor() {
-        this.serpienteActual = ['1-3','1-2','1-1'];  
+        this.tableroSize = 25;
+        this.serpienteActual = ['3-4','3-3','3-2'];  
         this.direccion = 1;
         this.tablero = []; 
         this.manzana;   
+        this.puntaje = 0;
     }
 
     iniciar() {
         document.addEventListener('keydown',(e)=> this.control(e));
+        this.pintarPuntaje();
         this.rellenarTablero();
         this.manzanaAzar();
+    }
+
+    reiniciar() {
+        this.despintarSerpiente();
+        this.serpienteActual = ['3-4','3-3','3-2']; 
+        this.direccion = 1;
+        this.puntaje = 0;
+        
     }
 
     rellenarTablero() {
         let tablero = [];
         const divTablero = document.querySelector('.tablero');
+        const fragmento = document.createDocumentFragment();
 
-        for(let i=0;i<30;i++) {
+        for(let i=0;i<this.tableroSize;i++) {
             tablero[i] = [];
         }
 
-        for(let i=0;i<30;i++) {
-            for(let j=0;j<30;j++) {
+        for(let i=0;i<this.tableroSize;i++) {
+            for(let j=0;j<this.tableroSize;j++) {
                 const C = new Cuadrado('cuadrado',i.toString()+'-'+j.toString());
                 let cuadrado = C.crearCuadrado();
                 tablero[i][j] = cuadrado;
-                divTablero.appendChild(cuadrado);
+                fragmento.appendChild(cuadrado);
             }
         }
-        this.tablero = tablero;                
+        this.tablero = tablero;  
+        divTablero.appendChild(fragmento);              
     }
 
     despintarSerpiente() {
@@ -43,7 +55,7 @@ class Game {
 
 
     pintarSerpiente() {  
-        let primero = true;      
+        let primero = true;
         this.serpienteActual.forEach(id => {
             let ids = this.obtenerIds(id);
             if(primero) {
@@ -55,28 +67,30 @@ class Game {
         }); 
     }
 
+    pintarPuntaje(){
+        const puntaje = document.querySelector('.puntaje h3');
+        puntaje.innerHTML = `P:${this.puntaje}`;
+    }
+
     moverSerpiente() {
         let direccion;
         let cola = this.serpienteActual.pop()  
         let idCabeza = this.obtenerIds(this.serpienteActual[0]);
-        let idManzana = this.obtenerIds(this.manzana);        
+        let idManzana = this.obtenerIds(this.manzana);  
         
         switch(this.direccion) {
-            case 
-                1: direccion = idCabeza[0]+'-'+(parseInt(idCabeza[1])+1);
+            case 1: direccion = idCabeza[0]+'-'+(parseInt(idCabeza[1])+1);
             break;
-            case 
-                2: direccion = (parseInt(idCabeza[0])-1)+'-'+idCabeza[1];
+            case 2: direccion = (parseInt(idCabeza[0])-1)+'-'+idCabeza[1];
             break;
-            case 
-                3: direccion = idCabeza[0]+'-'+(parseInt(idCabeza[1])-1);
+            case 3: direccion = idCabeza[0]+'-'+(parseInt(idCabeza[1])-1);
             break;
-            case 
-                4: direccion = (parseInt(idCabeza[0])+1)+'-'+idCabeza[1];
+            case 4: direccion = (parseInt(idCabeza[0])+1)+'-'+idCabeza[1];
             break;
         }
 
         this.serpienteActual.unshift(direccion); 
+
         if(idCabeza[0] === idManzana[0] && idCabeza[1] === idManzana[1]) {
             this.comerManzana(idManzana,cola);
         }
@@ -88,6 +102,8 @@ class Game {
             if(requestID) {
                 window.cancelAnimationFrame(requestID);
             }
+            document.querySelector('.btn-reiniciar').style.display = 'flex';
+            this.actualizarPuntos();
         } else { 
             this.despintarSerpiente();
             this.moverSerpiente();
@@ -125,7 +141,7 @@ class Game {
     chocarPared(idCabeza) {
         let id0 = parseInt(idCabeza[0]);
         let id1 = parseInt(idCabeza[1]);
-        if(id1 >= 0 && id1 <= 29 && id0 >= 0 && id0 <= 29) {            
+        if(id1 > 0 && id1 < this.tableroSize-1 && id0 > 0 && id0 < this.tableroSize-1) {            
             return false;
         } else {
             return true;
@@ -138,8 +154,8 @@ class Game {
     }
 
     manzanaAzar() {
-        let x = Math.floor((Math.random() * (29 - 0 + 1)) + 0);
-        let y = Math.floor((Math.random() * (29 - 0 + 1)) + 0);
+        let x = Math.floor(Math.random() * (((this.tableroSize-2)+1) - 1) + 1);
+        let y = Math.floor(Math.random() * (((this.tableroSize-2)+1) - 1) + 1);
         this.tablero[x][y].classList.add('manzana');
         this.manzana = x+'-'+y; 
     }
@@ -147,57 +163,26 @@ class Game {
     comerManzana(id,cola) {
         this.tablero[id[0]][id[1]].classList.remove('manzana');
         this.serpienteActual.push(cola);
+        this.puntaje++;
+        this.pintarPuntaje();
         this.manzanaAzar(); 
     }
 
+    actualizarPuntos() {
+        let puntos = JSON.parse(localStorage.getItem('puntos'));
+        puntos.push(this.puntaje);
+        localStorage.setItem('puntos', JSON.stringify(puntos));
+    }
+
     control(e){ 
-        console.log(e.keyCode)
-        if (e.keyCode === 39){
-            this.direccion = 1 // derecha 
-        } else if (e.keyCode === 38){ 
-            this.direccion = 2 // arriba
-        }else if (e.keyCode === 37){ 
-            this.direccion = 3 // izquierda
-        }else if (e.keyCode === 40){
-            this.direccion = 4 // abajo
-        } 
+        switch(e.keyCode) {
+            case 39: this.direccion !== 3 ? this.direccion = 1 : ''; // derecha 
+            break;
+            case 38: this.direccion !== 4 ? this.direccion = 2 : ''; // arriba
+            break;
+            case 37: this.direccion !== 1 ? this.direccion = 3 : ''; // izquierda
+            break;
+            case 40: this.direccion !== 2 ? this.direccion = 4 : ''; // abajo
+        }
     } 
-
-}
-
-class Cuadrado {
-    constructor(clase,id,) {
-        this.clase = clase;
-        this.id = id;
-        this.elemento;
-    }
-
-    crearCuadrado() {
-        const cuadrado = document.createElement('div');
-        cuadrado.classList.add(this.clase);
-        cuadrado.id = this.id;
-        this.elemento = cuadrado;
-        return cuadrado;
-    }
-}
-
-var fotogramasPorSegundo = 5;
-const btnIniciar = document.querySelector('.btn-iniciar');
-let requestID;
-const G = new Game();
-
-btnIniciar.addEventListener('click', ()=> {
-    G.iniciar()
-    loop()
-    btnIniciar.style.display = 'none';
-    
-});
-
-
-
-function loop() {
-    setTimeout(function() {
-        requestID = window.requestAnimationFrame(loop);
-        G.moverResultado();
-    }, 1000 / fotogramasPorSegundo);
 }
