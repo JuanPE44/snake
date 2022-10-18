@@ -14,6 +14,7 @@ class Game {
         this.pintarPuntaje();
         this.rellenarTablero();
         this.manzanaAzar();
+        this.pintarMejorPuntaje();
     }
 
     reiniciar() {
@@ -21,7 +22,7 @@ class Game {
         this.serpienteActual = ['3-4','3-3','3-2']; 
         this.direccion = 1;
         this.puntaje = 0;
-        
+        this.pintarPuntaje();
     }
 
     rellenarTablero() {
@@ -68,8 +69,8 @@ class Game {
     }
 
     pintarPuntaje(){
-        const puntaje = document.querySelector('.puntaje h3');
-        puntaje.innerHTML = `P:${this.puntaje}`;
+        const puntaje = document.querySelector('.score');
+        puntaje.innerHTML = `Score:${this.puntaje}`;
     }
 
     moverSerpiente() {
@@ -104,6 +105,7 @@ class Game {
             }
             document.querySelector('.btn-reiniciar').style.display = 'flex';
             this.actualizarPuntos();
+            this.pintarMejorPuntaje();
         } else { 
             this.despintarSerpiente();
             this.moverSerpiente();
@@ -172,6 +174,17 @@ class Game {
         let puntos = JSON.parse(localStorage.getItem('puntos'));
         puntos.push(this.puntaje);
         localStorage.setItem('puntos', JSON.stringify(puntos));
+    }
+
+    pintarMejorPuntaje() {
+        let puntos = JSON.parse(localStorage.getItem('puntos'));
+        let max = 0;
+        puntos.forEach(p => {
+            if(p>max) {
+                max = p;
+            }
+        })
+        document.querySelector('.high-score').innerHTML = `Highscore:${max}`;
     }
 
     control(e){ 

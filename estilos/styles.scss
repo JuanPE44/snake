@@ -6,6 +6,10 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Silkscreen', cursive;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
 }
 
 body {
@@ -20,12 +24,11 @@ body {
 
     .puntaje {
         display: flex;
-        margin-left: 20px;
-
-        h3 {
-            color: #2df829;
-            font-size: 1.2rem;
-        }
+        justify-content: space-between;
+        padding: 0 20px;
+        color: #2df829;
+        font-size: 1.2rem;
+        
     }
 
     .tablero {
@@ -93,6 +96,7 @@ body {
                 padding: .5rem;
                 border: 2px solid #2df829;                
                 cursor: pointer;
+                background: #222;
             }
 
             .btn-reiniciar {
@@ -102,6 +106,7 @@ body {
                 padding: .5rem;
                 border: 2px solid #2df829;                
                 cursor: pointer;
+                background: #222;
             }
         }
 
