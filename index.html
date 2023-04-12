@@ -1,33 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="estilos/styles.css">
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="estilos/styles.css" />
     <title>Snake</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="contenedor-app">
-        <div class="puntaje">
-            <span class="score"></span>
-            <span class="high-score"></span>
+      <div class="puntaje">
+        <span class="score"></span>
+        <span class="high-score"></span>
+      </div>
+      <div class="tablero">
+        <div class="arriba"></div>
+        <div class="derecha"></div>
+        <div class="abajo"></div>
+        <div class="izquierda"></div>
+        <div class="botones">
+          <div class="btn-iniciar">Iniciar</div>
+          <div class="btn-reiniciar">Reiniciar</div>
         </div>
-        <div class="tablero">
-            <div class="arriba"></div>
-            <div class="derecha"></div>
-            <div class="abajo"></div>
-            <div class="izquierda"></div>
-            <div class="botones">               
-                <div class="btn-iniciar">Iniciar</div>
-                <div class="btn-reiniciar">Reiniciar</div>
-            </div>
-        </div>        
+      </div>
     </div>
     <script src="scripts/cuadrado.js"></script>
     <script src="scripts/tablero.js"></script>
     <script src="scripts/main.js"></script>
-</body>
+  </body>
 </html>
