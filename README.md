@@ -15,6 +15,12 @@ Este es un proyecto del juego del Snake utilizando HTML, Sass y JavaScript. El o
 - Detecta colisiones con las paredes y el cuerpo de la serpiente para terminar el juego.
 - Muestra la puntuación actual.
 
+## Uso
+
+- Utiliza las teclas de flecha izquierda (`←`), derecha (`→`), arriba (`↑`) y abajo (`↓`) para controlar la dirección de la serpiente.
+- El objetivo del juego es comer la comida en el tablero para crecer y ganar puntos.
+- El juego termina si la serpiente choca con las paredes o su propio cuerpo.
+
 ## Instalación
 
 1. Clona este repositorio en tu máquina local
