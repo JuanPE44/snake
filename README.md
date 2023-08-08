@@ -8,7 +8,6 @@ Este es un proyecto del juego del Snake utilizando HTML, Sass y JavaScript. El o
 
 ## Características
 
-- Interfaz gráfica simple y fácil de usar.
 - Control de la serpiente utilizando las teclas de flecha del teclado.
 - Generación de comida aleatoria en el tablero.
 - Aumento de la longitud de la serpiente al comer comida.
